@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      
+      #form_top { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; top: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input_top { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem;}
+      #input_top:focus { outline: none; }
+    
+      #form_bottom { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input_bottom { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input_bottom:focus { outline: none; }
+      
+      #form_top > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+      #form_bottom > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+      
+      #messages { list-style-type: none; margin-top: 2.5rem; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="form_top" action="">
+        <input id="input_top" autocomplete="off" /><button>Send</button>
+    </form>
+    <form id="form_bottom" action="">
+        <input id="input_bottom" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var messages = document.getElementById('messages');
+        var form_top = document.getElementById('form_top');
+        var form_bottom = document.getElementById('form_bottom');
+        var input_top = document.getElementById('input_top');
+        var input_bottom = document.getElementById('input_bottom');
+
+        form_top.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (input_top.value) {
+            socket.emit('send message', input_top.value);
+            input_top.value = '';
+            }
+        });
+
+        form_bottom.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (input_bottom.value) {
+            socket.emit('send message', input_bottom.value);
+            input_bottom.value = '';
+            }
+        });
+
+        socket.on('send message', function(msg){
+            var item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+  </body>
+</html>
