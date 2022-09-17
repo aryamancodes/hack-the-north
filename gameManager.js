@@ -23,7 +23,6 @@ const sendHTTPRequest = (method, url, data) => {
 
 function getInput(){
   if (input.value) {
-    console.log("GOT INPUT" +input.value);
     currAnswer = input.value;
     input.value = '';
   }
@@ -36,8 +35,16 @@ function gameOver() {
   //$('#playAgainButton').show();
   clearInterval(timer);
   input.style.visibility = "hidden";
+  sendButton.style.visibility = "hidden";
   showAnswer();
   getWord();
+}
+
+
+
+async function getData() {
+  const response = await fetch(promptURL);
+  const data = await response.json()
 }
 
 function showAnswer(){
@@ -54,9 +61,13 @@ function updateTimer() {
     gameOver();
   }
 }
-
+var first = true;
 // The button has an on-click event handler that calls this
 function start() {
+  if(first){
+    getData();
+    first = false;
+  }
   // setInterval is a built-in function that will call the given function
   // every N milliseconds (1 second = 1000 ms)
   timer = setInterval(updateTimer, 1000);
