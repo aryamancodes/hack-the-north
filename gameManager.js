@@ -1,6 +1,5 @@
 var messages = document.getElementById('messages');
 var input = document.getElementById('input');
-var 
 
 var timer; 
 var timeLeft = 11; // seconds

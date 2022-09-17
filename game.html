@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Page</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="goose-animation.css">
 
 </head>
 <body>
@@ -13,6 +14,7 @@
 
     <button id="playAgainButton" onclick="start()">Go!</button>
     <ul id="messages"></ul>
+    <div><img src = "goose-transparent.png" class="Goose" transform="scaleX(-1)"></div>
     <input id="input" autocomplete="off"/><button id="sendButton" onclick="getInput();return false;">Send</button>
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
