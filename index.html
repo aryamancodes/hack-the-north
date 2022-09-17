@@ -15,12 +15,20 @@
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
     </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+    <div class="main">
+      
+      <div class="countdown">
+        
+      </div>
+      <ul id="messages"></ul>
+
+      <form id="form" action="">
+          <input id="input" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
