@@ -1,25 +1,12 @@
-const justinurl = 'https://htn-backend-jtoft.k8s.csclub.cloud/getRandomWord';
+const promptURL = 'https://htn-backend-jtoft.k8s.csclub.cloud/getRandomWord';
 
 var messages = document.getElementById('messages');
 var input = document.getElementById('input');
-
 var timer; 
-
-var timeLeft = 11; // seconds
-
+var timeLeft = 61; // seconds+1
 var currAnswer;
-
-/*
-const sendHTTPRequest = (method, url, data) => {
-  return fetch(url)
-  .then(response => {
-    return response.json();
-  })
-  .then(responseData => {
-    console.log(responseData);
-  });
-};
-*/
+var firstApiCall = true;
+var currPrompt = [];
 
 function getInput(){
   if (input.value) {
@@ -32,7 +19,6 @@ function getInput(){
 // IMPORTANT: run playbutton request before cancelInterval(timer)
 function gameOver() {
   // This cancels the setInterval, so the updateTimer stops getting called
-  //$('#playAgainButton').show();
   clearInterval(timer);
   input.style.visibility = "hidden";
   sendButton.style.visibility = "hidden";
@@ -45,6 +31,8 @@ function gameOver() {
 async function getData() {
   const response = await fetch(promptURL);
   const data = await response.json()
+  currPrompt = data;
+  console.log(currPrompt);
 }
 
 function showAnswer(){
@@ -61,12 +49,11 @@ function updateTimer() {
     gameOver();
   }
 }
-var first = true;
 // The button has an on-click event handler that calls this
 function start() {
-  if(first){
+  if(firstApiCall){
     getData();
-    first = false;
+    firstApiCall = false;
   }
   // setInterval is a built-in function that will call the given function
   // every N milliseconds (1 second = 1000 ms)
@@ -77,27 +64,6 @@ function start() {
   $("#playAgainButton").hide();
 
   updateTimer();
-
-  var socket = io();
-  var messages = document.getElementById("messages");
-  var form = document.getElementById("form");
-  var input = document.getElementById("input");
-
-  form.addEventListener("submit", function (e) {
-    //e.preventDefault();
-    if (input.value) {
-      socket.emit("send message", input.value);
-      input.value = "";
-    }
-  });
-
-  socket.on("send message", (msg) => {
-    var item = document.createElement("li");
-    item.textContent = msg;
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
-  });
-
-  // We don't want the to be able to restart the timer while it is running,
+   // We don't want the to be able to restart the timer while it is running,
   // so hide the button.
 }
