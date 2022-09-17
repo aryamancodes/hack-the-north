@@ -12,9 +12,18 @@
 <body>
     <p>You have: <span id="timer">0</span> seconds remaining!</p>
 
-    <button id="playAgainButton" onclick="start()">Go!</button>
+    <p> Try to think of the best synonym of the definition below!</p>
     <ul id="messages"></ul>
-    <div><img src = "goose-transparent.png" class="Goose" transform="scaleX(-1)"></div>
+    <div id="flexContainer">
+      <div><img src = "goose-transparent.png" class="Goose" transform="scaleX(-1)"></div>
+      <div>
+        <textarea id="definition">TEST</textarea>
+        <button id="playAgainButton" onclick="start()">Go!</button>
+        <h1 id="score">SCORE: <span>100</span></h1>
+        <h1 id="output">Keep Trying!</h1>
+      </div>
+      
+    </div>
     <input id="input" autocomplete="off"/><button id="sendButton" onclick="getInput();return false;">Send</button>
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"

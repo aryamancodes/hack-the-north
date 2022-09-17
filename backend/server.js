@@ -1,3 +1,4 @@
+var cors = require('cors')
 var db = require('./db.json')
 
 const express = require("express");
@@ -5,6 +6,8 @@ const express = require("express");
 const PORT = 80;
 
 const app = express();
+
+app.use(cors())
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);

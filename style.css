@@ -24,3 +24,21 @@ body {
 p{
     color: white;
 }
+
+#flexContainer {
+    display: flex;
+}
+
+#definition {
+    width: 200px;
+    height: 100px;
+    resize: none;
+}
+
+#score {
+    color: greenyellow;
+}
+
+#output {
+    color: lightblue;
+}
