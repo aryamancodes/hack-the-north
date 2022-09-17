@@ -2,16 +2,38 @@ const promptURL = 'https://htn-backend-jtoft.k8s.csclub.cloud/getRandomWord';
 
 var messages = document.getElementById('messages');
 var input = document.getElementById('input');
-var timer; 
-var timeLeft = 61; // seconds+1
-var currAnswer;
-var firstApiCall = true;
-var currPrompt = [];
+var promptOutput = document.getElementById('definition');
+var score = document.getElementById('score');
 
+var timer; 
+var timeLeft = 31; // seconds+1
+var currGuess;
+var firstApiCall = true;
+
+//struct of the form:
+//  { word:, definition:, synonyms: };
+var currPrompt
+
+
+//called when an input is made by the player
 function getInput(){
   if (input.value) {
-    currAnswer = input.value;
+    currGuess = input.value;
     input.value = '';
+    evaluateAnswer();
+  }
+}
+
+//format str to remove all whitespace and covert to lowerecase
+function formatString(str) {
+  output = str.toLowerCase().replaceAll(' ', '');
+  return output;
+}
+
+function evaluateAnswer(){
+  if(currPrompt.synonyms.includes(currGuess)){
+    score.textContent = (parseInt(score.textContent)+1).toString();;
+    getPrompt();
   }
 }
 
@@ -28,18 +50,31 @@ function gameOver() {
 
 
 
-async function getData() {
+async function getPrompt() {
   const response = await fetch(promptURL);
   const data = await response.json()
-  currPrompt = data;
-  console.log(currPrompt);
+  //reject words with syns less than the minimum of 3
+  if(data.syns.length <= 3){
+    getPrompt();
+  }
+  else{
+      currPrompt = {
+      word: formatString(data.word),
+      definition: data.definition, 
+      synonyms: data.syns
+    };
+    console.table(currPrompt)
+    promptOutput.value = currPrompt.word + ":\n" + currPrompt.definition;
+  }
 }
 
 function showAnswer(){
-  var item = document.createElement('li');
-  item.textContent = currAnswer;
-  messages.appendChild(item);
-  window.scrollTo(0, document.body.scrollHeight);
+  //TODO: show syns for last unguessed word
+  
+  // var item = document.createElement('li');
+  // item.textContent = currGuess;
+  // messages.appendChild("The possible synonyms were" + item);
+  // window.scrollTo(0, document.body.scrollHeight);
 }
 
 function updateTimer() {
@@ -52,7 +87,7 @@ function updateTimer() {
 // The button has an on-click event handler that calls this
 function start() {
   if(firstApiCall){
-    getData();
+    getPrompt();
     firstApiCall = false;
   }
   // setInterval is a built-in function that will call the given function
