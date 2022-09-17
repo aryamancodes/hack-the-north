@@ -1,18 +1,35 @@
+var messages = document.getElementById('messages');
+var input = document.getElementById('input');
+var 
+
 var timer; 
 var timeLeft = 11; // seconds
+
+var currAnswer;
+
+function getInput(){
+  if (input.value) {
+    console.log("GOT INPUT" +input.value);
+    currAnswer = input.value;
+    input.value = '';
+  }
+}
 
 // What to do when the timer runs out
 // IMPORTANT: run playbutton request before cancelInterval(timer)
 function gameOver() {
   // This cancels the setInterval, so the updateTimer stops getting called
-  $('#playAgainButton').show();
+  //$('#playAgainButton').show();
+  clearInterval(timer);
+  input.style.visibility = "hidden";
+  showAnswer();
+}
 
-
-  cancelInterval(timer);
-  
-  // 
-  // re-show the button, so they can start it again
-
+function showAnswer(){
+  var item = document.createElement('li');
+  item.textContent = currAnswer;
+  messages.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
 function updateTimer() {
