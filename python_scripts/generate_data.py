@@ -10,7 +10,6 @@ word_list = [
     "engine",
     "buttocks",
     "goose",
-    "ask",
     "water",
     "large",
     "cool",
@@ -20,17 +19,21 @@ word_list = [
     "get",
     "go",
     "idea",
-    "important",
-    "kill",
     "neat",
     "mark",
     "old",
-    "new",
-    "predicament",
-    "slow",
-    "ugly",
     "trouble",
-    "take"
+    "take",
+    "water",
+    "table",
+    "head",
+    "shoe",
+    "fly",
+    "scream",
+    "tin",
+    "button",
+    "book",
+    "cold"
 ]
 
 DICT_API = "https://api.dictionaryapi.dev/api/v2/entries/en/"
@@ -74,4 +77,8 @@ for word in word_list:
 
 out = {"words": words}
 
-print(json.dumps(out))
+f = open("db.json", "w")
+
+f.write(json.dumps(out))
+
+f.close()
