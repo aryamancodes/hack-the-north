@@ -14,7 +14,7 @@ var firstApiCall = true;
 
 //struct of the form:
 //  { word:, definition:, synonyms: };
-var currPrompt
+var currPrompt = null
 
 
 //called when an input is made by the player
@@ -36,8 +36,8 @@ function evaluateAnswer(){
   if(currPrompt.synonyms.includes(currGuess)){
     var length = currPrompt.synonyms.length;
     var index = currPrompt.synonyms.indexOf(currGuess);
-    var fraction = 1 - (index/length).toFixed(2);
-    var currScore = fraction * 100;
+    var fraction = 1 - (index/length)
+    var currScore = parseInt(fraction * 100);
 
     score.textContent = (parseInt(score.textContent) + currScore).toString();
     gameMessage.textContent = "Correct Guess! Next Word:";
@@ -64,8 +64,9 @@ function gameOver() {
 async function getPrompt() {
   const response = await fetch(promptURL);
   const data = await response.json()
-  //reject words with syns less than the minimum of 3
-  if(data.syns.length <= 3){
+  //reject repeat words or words with syns less than the minimum of 3
+  console.log(data.word + currPrompt);
+  if(data.syns.length <= 3 || (currPrompt && formatString(data.word) == currPrompt.word)){
     getPrompt();
   }
   else{
@@ -125,8 +126,3 @@ $(document).on("keypress", function(e) {
   }
 });
 
-/*
-input.addEventListener("keypress", function(event) {
-  console.log("success");
-  document.getElementById("input").click();
-});*/
