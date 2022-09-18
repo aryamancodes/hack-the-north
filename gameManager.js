@@ -5,9 +5,10 @@ var input = document.getElementById('input');
 var promptOutput = document.getElementById('definition');
 var score = document.getElementById('score');
 var gameMessage = document.getElementById('output');
+var playButton = document.getElementById('playAgainButton');
 
 var timer; 
-var timeLeft = 31; // seconds+1
+var timeLeft = 3; // seconds+1
 var currGuess;
 var firstApiCall = true;
 
@@ -52,9 +53,8 @@ function evaluateAnswer(){
 // IMPORTANT: run playbutton request before cancelInterval(timer)
 function gameOver() {
   // This cancels the setInterval, so the updateTimer stops getting called
-
-  $("#playAgainButton").show();
-
+  playAgainButton.textContent = "Play again";
+  playAgainButton.style.visibility = "visible";
   clearInterval(timer);
   input.style.visibility = "hidden";
   sendButton.style.visibility = "hidden";
@@ -103,11 +103,15 @@ function start() {
   }
   // setInterval is a built-in function that will call the given function
   // every N milliseconds (1 second = 1000 ms)
-  timer = setInterval(updateTimer, 1000);
+  if(playAgainButton.textContent == "Play again"){
+    location.reload();
+  }
+  else { timer = setInterval(updateTimer, 1000); }
 
   // It will be a whole second before the time changes, so we'll call the update
   // once ourselves
-  $("#playAgainButton").hide();
+  playAgainButton.style.visibility = "hidden";
+  //$("#playAgainButton").hide();
 
   updateTimer(); 
 }
