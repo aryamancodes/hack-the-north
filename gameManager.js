@@ -4,6 +4,7 @@ var messages = document.getElementById('messages');
 var input = document.getElementById('input');
 var promptOutput = document.getElementById('definition');
 var score = document.getElementById('score');
+var gameMessage = document.getElementById('output');
 
 var timer; 
 var timeLeft = 31; // seconds+1
@@ -32,8 +33,18 @@ function formatString(str) {
 
 function evaluateAnswer(){
   if(currPrompt.synonyms.includes(currGuess)){
-    score.textContent = (parseInt(score.textContent)+1).toString();;
+    var length = currPrompt.synonyms.length;
+    var index = currPrompt.synonyms.indexOf(currGuess);
+    var fraction = 1 - (index/length).toFixed(2);
+    var currScore = fraction * 100;
+
+    score.textContent = (parseInt(score.textContent) + currScore).toString();
+    gameMessage.textContent = "Correct Guess! Next Word:";
     getPrompt();
+  }
+  else {
+    gameMessage.textContent = "Incorrect Guess! Keep Trying!";
+    // place a text prompt!
   }
 }
 
@@ -41,6 +52,9 @@ function evaluateAnswer(){
 // IMPORTANT: run playbutton request before cancelInterval(timer)
 function gameOver() {
   // This cancels the setInterval, so the updateTimer stops getting called
+
+  $("#playAgainButton").show();
+
   clearInterval(timer);
   input.style.visibility = "hidden";
   sendButton.style.visibility = "hidden";
