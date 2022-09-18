@@ -97,6 +97,7 @@ function updateTimer() {
 }
 // The button has an on-click event handler that calls this
 function start() {
+  gameMessage.textContent = "Make a Guess!";
   if(firstApiCall){
     getPrompt();
     firstApiCall = false;
@@ -115,3 +116,17 @@ function start() {
 
   updateTimer(); 
 }
+
+
+$(document).on("keypress", function(e) {
+  if(e.which == 13) {
+    console.log("success");
+    getInput();
+  }
+});
+
+/*
+input.addEventListener("keypress", function(event) {
+  console.log("success");
+  document.getElementById("input").click();
+});*/
