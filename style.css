@@ -47,11 +47,8 @@ p{
 }
 
 .h1-border{
-    margin-top: 100px;
     height: 80px;
     align-items: center;
-    border: 1px solid black;
-    background-color: blue;
     padding: 10px;
 }
 
