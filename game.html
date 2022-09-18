@@ -17,7 +17,13 @@
   </head>
   <body>
     <div class="container justify-content-center">
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center" style="margin-top: 5%;">
+        <div class="col-md-auto">
+          <h1>ABCGEESE</h1>
+
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center top-space">
         <div class="col-md-auto">
           <p>You have: <span id="timer">0</span> seconds remaining!</p>
         </div>
@@ -29,7 +35,7 @@
         </div>
       </div>
 
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center top-space">
         <div class="col-lg-auto">
           <ul id="messages"></ul>
           <div class="d-flex">
@@ -41,9 +47,13 @@
               />
             </div>
             <div>
-              <textarea id="definition">TEST</textarea>
-              <button id="playAgainButton" onclick="start()">Go!</button>
-              <h1 id="score_text">SCORE: <span id="score">0</span></h1>
+              <div class="row top-space">
+                <div class="col d-flex justify-content-between align-items-center">
+                  <textarea  id="definition" readonly>TEST</textarea>
+                  <button style="margin-left: 20px;" class="btn btn-outline-primary" id="playAgainButton" onclick="start()">Go!</button>
+                </div>
+              </div>
+              <h1 class="top-space" id="score_text">SCORE: <span id="score">0</span></h1>
               <h1 id="output">Keep Trying!</h1>
             </div>
           </div>
@@ -51,16 +61,14 @@
 
       </div>
 
-      <div class="row d-flex justify-content-center">
-        <input id="input" autocomplete="off" /><button
-          id="sendButton"
-          onclick="getInput();"
-        >
-          Send
-        </button>
+      <div class="row d-flex justify-content-center top-space">
+        <div class="col-lg-auto" >
+          <input class="inputbox" id="input" autocomplete="off"/>
+          <button id="sendButton" onclick="getInput();">Send</button>
+        </div>
       </div>
 
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center" style="margin-top:100px;">
         <div class="col-md-auto">
           <a href="index.html">
             <button>Quit Game</button>
