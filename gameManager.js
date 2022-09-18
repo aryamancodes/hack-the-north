@@ -8,7 +8,7 @@ var gameMessage = document.getElementById('output');
 var playButton = document.getElementById('playAgainButton');
 
 var timer; 
-var timeLeft = 3; // seconds+1
+var timeLeft = 31; // seconds+1
 var currGuess;
 var firstApiCall = true;
 

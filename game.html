@@ -1,36 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Page</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="goose-animation.css">
-
-</head>
-<body>
-    <p>You have: <span id="timer">0</span> seconds remaining!</p>
-
-    <p> Try to think of the best synonym of the definition below!</p>
-    <ul id="messages"></ul>
-    <div id="flexContainer">
-      <div><img src = "goose-transparent.png" class="Goose" transform="scaleX(-1)"></div>
-      <div>
-        <textarea id="definition">TEST</textarea>
-        <button id="playAgainButton" onclick="start()">Go!</button>
-        <h1 id="score_text">SCORE: <span id="score">0</span></h1>
-        <h1 id="output">Keep Trying!</h1>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="goose-animation.css" />
+  
+  </head>
+  <body>
+    <div class="container justify-content-center">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-auto">
+          <p>You have: <span id="timer">0</span> seconds remaining!</p>
+        </div>
       </div>
-      
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-auto">
+          <p class="d-flex justify-content-center">Try to think of the best synonym of the definition below!</p>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-auto">
+          <ul id="messages"></ul>
+          <div class="d-flex">
+            <div>
+              <img
+                src="goose-transparent.png"
+                class="Goose"
+                transform="scaleX(-1)"
+              />
+            </div>
+            <div>
+              <textarea id="definition">TEST</textarea>
+              <button id="playAgainButton" onclick="start()">Go!</button>
+              <h1 id="score_text">SCORE: <span id="score">0</span></h1>
+              <h1 id="output">Keep Trying!</h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <input id="input" autocomplete="off" /><button
+          id="sendButton"
+          onclick="getInput();"
+        >
+          Send
+        </button>
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-auto">
+          <a href="index.html">
+            <button>Quit Game</button>
+          </a>
+        </div>
+      </div>
     </div>
-    <input id="input" autocomplete="off"/><button id="sendButton" onclick="getInput();">Send</button>
 
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
       integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
     <script src="gameManager.js"></script>
-
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
