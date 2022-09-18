@@ -59,10 +59,7 @@ function gameOver() {
   input.style.visibility = "hidden";
   sendButton.style.visibility = "hidden";
   showAnswer();
-  getWord();
 }
-
-
 
 async function getPrompt() {
   const response = await fetch(promptURL);
@@ -82,13 +79,13 @@ async function getPrompt() {
   }
 }
 
+//show syns for last unguessed word
 function showAnswer(){
-  //TODO: show syns for last unguessed word
-  
-  // var item = document.createElement('li');
-  // item.textContent = currGuess;
-  // messages.appendChild("The possible synonyms were" + item);
-  // window.scrollTo(0, document.body.scrollHeight);
+  output = "Time's up! The synonyms for " + currPrompt.word + " are:\n";
+  for(syn of currPrompt.synonyms){
+    output += syn + ", ";
+  }
+  promptOutput.value = output.slice(0,-2);
 }
 
 function updateTimer() {
@@ -112,7 +109,5 @@ function start() {
   // once ourselves
   $("#playAgainButton").hide();
 
-  updateTimer();
-   // We don't want the to be able to restart the timer while it is running,
-  // so hide the button.
+  updateTimer(); 
 }
